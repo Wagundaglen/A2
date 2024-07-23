@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Details</title>
+    <link rel="stylesheet" href="{% static 'css/global_style.css' %}">
+</head>
+<body>
+    <h1>Details for {{ bank.name }}</h1>
+    <p>Address: {{ bank.address }}</p>
+    <p>Phone Number: {{ bank.phone_number }}</p>
+    <h2>Branches</h2>
+    <ul>
+        {% for branch in branches %}
+            <li><a href="{% url 'branch_details' branch.id %}">{{ branch.name }}</a></li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'add_branch' bank.id %}">Add Branch</a>
+</body>
+</html>
+
+

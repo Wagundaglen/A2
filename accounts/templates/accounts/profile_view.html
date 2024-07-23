@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile View</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'accounts/css/style.css' %}">
+</head>
+<body>
+    <h1>Profile View</h1>
+    <!-- Display user profile information here -->
+    <a href="{% url 'profile_edit' %}">Edit Profile</a>
+</body>
+</html>
+
