@@ -4,22 +4,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Home - Banking Management System</title>
     <link rel="stylesheet" href="{% static 'css/global_style.css' %}">
+    <style>
+        /* Additional styles for homepage */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        header {
+            background-color: #343a40; /* Dark header for contrast */
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .hero-section {
+            background: url('https://images.pexels.com/photos/5999936/pexels-photo-5999936.jpeg') no-repeat center center/cover; /* Updated background image */
+            color: white;
+            padding: 150px 20px;
+            text-align: center;
+            border-radius: 10px; /* Rounded corners */
+            margin: 0 auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+            position: relative;
+            z-index: -1;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+            border-radius: 10px;
+            z-index: 1;
+        }
+        .hero-section h1 {
+            font-size: 2.5em;
+            margin: 0;
+            line-height: 1.2;
+            position: relative;
+            z-index: 2;
+        }
+        .hero-section p {
+            font-size: 1.2em;
+            margin: 20px 0;
+            position: relative;
+            z-index: 2;
+        }
+        .cta-button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1em;
+            position: relative;
+            z-index: 2;
+        }
+        .cta-button:hover {
+            background-color: #218838;
+        }
+        .features {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .feature {
+            text-align: center;
+            width: 30%;
+        }
+        .feature img {
+            max-width: 100px;
+            height: auto;
+        }
+        .feature h2 {
+            margin-top: 10px;
+        }
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Welcome to the Home Page</h1>
+        <h1>Welcome to the Banking Management System</h1>
         <nav>
             <a href="{% url 'login' %}">Login</a> |
             <a href="{% url 'register' %}">Register</a>
         </nav>
     </header>
+    
     <main>
-        <!-- Your content here -->
+        <section class="hero-section">
+            <h1>Manage Your Accounts and Banking Information with Ease</h1>
+            <p>Your one-stop solution for managing your financial data efficiently and securely.</p>
+            <a href="{% url 'register' %}" class="cta-button">Get Started</a>
+        </section>
+        
+        <section class="features">
+            <div class="feature">
+                <h2>Account Management</h2>
+                <p>Easily manage your account details and track your financial transactions.</p>
+            </div>
+            <div class="feature">
+                <h2>Bank Management</h2>
+                <p>Find and manage your banks and branches effortlessly.</p>
+            </div>
+            <div class="feature">
+                <h2>Secure & Reliable</h2>
+                <p>Enjoy peace of mind with our secure and reliable banking management system.</p>
+            </div>
+        </section>
     </main>
+    
+    <footer>
+        <p>&copy; 2024 Banking Management System. All rights reserved.</p>
+    </footer>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
 
 
 
