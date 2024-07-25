@@ -17,7 +17,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 100vh; /* Ensure the body takes full height */
+            height: 100vh;
         }
         .register-container {
             width: 100%;
@@ -27,7 +27,8 @@
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
             padding: 30px;
             box-sizing: border-box;
-            margin: 20px; /* Add margin to avoid touching the edges */
+            overflow-y: auto;
+            max-height: 90vh; /* Ensure the form fits within the viewport */
         }
         .register-header {
             text-align: center;
@@ -147,5 +148,7 @@
     <button class="back-btn" onclick="window.location.href='/'">Back to Home</button>
 </body>
 </html>
+
+
 
 

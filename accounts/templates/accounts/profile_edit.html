@@ -7,19 +7,20 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'accounts/css/style.css' %}">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
 
         body {
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f2f5;
             margin: 0;
             padding: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 100vh; /* Ensure the body takes full height */
+            min-height: 100vh;
         }
-        .edit-profile-container {
+        .edit-container {
             width: 100%;
             max-width: 800px;
             background: #ffffff;
@@ -27,37 +28,29 @@
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
             padding: 30px;
             box-sizing: border-box;
-            margin: 20px; /* Add margin to avoid touching the edges */
-            overflow-y: auto; /* Enable scrolling if content overflows */
+            overflow-y: auto;
+            max-height: 90vh;
         }
-        .edit-profile-header {
+        .edit-header {
             text-align: center;
             margin-bottom: 30px;
-            padding: 20px;
-            background: linear-gradient(135deg, #007bff 0%, #00c6ff 100%);
-            color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-        .edit-profile-header h1 {
+        .edit-header h1 {
             font-size: 2.5em;
             margin: 0;
-            font-weight: 700;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
         }
-        .edit-profile-form {
+        .edit-form {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
-            margin: 0;
         }
-        .edit-profile-form label {
+        .edit-form label {
             display: block;
             margin-bottom: 8px;
             font-weight: 500;
             color: #333;
         }
-        .edit-profile-form input {
+        .edit-form input {
             width: 100%;
             padding: 12px;
             border: 1px solid #ccc;
@@ -65,12 +58,12 @@
             font-size: 1em;
             box-sizing: border-box;
         }
-        .edit-profile-form input:focus {
+        .edit-form input:focus {
             border-color: #007bff;
             outline: none;
             box-shadow: 0 0 0 3px rgba(38, 143, 255, 0.25);
         }
-        .edit-profile-form button {
+        .edit-form button {
             grid-column: span 2;
             padding: 15px;
             background-color: #007bff;
@@ -81,17 +74,33 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
-        .edit-profile-form button:hover {
+        .edit-form button:hover {
+            background-color: #0056b3;
+        }
+        .back-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            z-index: 1000;
+        }
+        .back-btn:hover {
             background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-    <div class="edit-profile-container">
-        <div class="edit-profile-header">
-            <h1>Edit Your Profile</h1>
+    <div class="edit-container">
+        <div class="edit-header">
+            <h1>Edit Profile</h1>
         </div>
-        <form method="POST" action="{% url 'profile_edit' %}" class="edit-profile-form">
+        <form method="post" class="edit-form">
             {% csrf_token %}
             <label for="first_name">First Name:</label>
             <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}" required>
@@ -100,10 +109,7 @@
             <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}" required>
             
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" value="{{ user.email }}" required>
-            
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" value="{{ user.username }}" required>
+            <input type="email" id="email" name="email" value="{{ user.email }}">
             
             <label for="phone_number">Phone Number:</label>
             <input type="tel" id="phone_number" name="phone_number" value="{{ user.profile.phone_number }}">
@@ -123,8 +129,10 @@
             <button type="submit">Save Changes</button>
         </form>
     </div>
+    <button class="back-btn" onclick="window.location.href='{% url 'profile_view' %}'">Back to Profile</button>
 </body>
 </html>
+
 
 
 
