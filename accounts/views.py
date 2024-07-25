@@ -1,8 +1,11 @@
+# accounts/views.py
+
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from .models import Profile
 
 def home(request):
     return render(request, 'home.html')
@@ -38,6 +41,7 @@ def register(request):
 
         user = User.objects.create_user(username=username, password=password1, email=email, first_name=first_name, last_name=last_name)
         user.save()
+        Profile.objects.create(user=user)  # Create an empty profile for the new user
         return redirect('/accounts/login/')
     else:
         return render(request, 'accounts/register.html')
@@ -62,14 +66,24 @@ def logout_view(request):
 
 @login_required
 def profile_view(request):
-    return render(request, 'accounts/profile_view.html')
+    profile = Profile.objects.get(user=request.user)  # Get the user's profile
+    return render(request, 'accounts/profile_view.html', {'profile': profile})
 
 @login_required
 def profile_edit(request):
+    profile = Profile.objects.get(user=request.user)  # Get the user's profile
     if request.method == 'POST':
-        # Handle profile update logic here
-        return redirect('profile_view')
-    return render(request, 'accounts/profile_edit.html')
+        profile.phone_number = request.POST.get('phone_number')
+        profile.address = request.POST.get('address')
+        profile.city = request.POST.get('city')
+        profile.country = request.POST.get('country')
+        profile.postal_code = request.POST.get('postal_code')
+        profile.save()
+        return redirect('/accounts/profile/view/')
+    return render(request, 'accounts/profile_edit.html', {'profile': profile})
+
+
+
 
 
 
