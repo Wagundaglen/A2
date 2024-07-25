@@ -6,11 +6,158 @@
     <title>Profile View</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'accounts/css/style.css' %}">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .profile-container {
+            width: 100vw;
+            height: 100vh;
+            padding: 40px;
+            background: linear-gradient(135deg, #72edf2 10%, #5151e5 100%);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+            color: #fff;
+        }
+        .profile-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .profile-header img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid #fff;
+            margin-bottom: 20px;
+        }
+        .profile-header h1 {
+            margin: 10px 0;
+            font-size: 2.5em;
+        }
+        .profile-header p {
+            font-size: 1.2em;
+            color: #eee;
+        }
+        .profile-info {
+            width: 100%;
+            max-width: 600px;
+            text-align: left;
+            margin-top: 20px;
+        }
+        .profile-info h2 {
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            border-bottom: 2px solid #fff;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+        .profile-info dl {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0;
+            color: #eee;
+        }
+        .profile-info dt,
+        .profile-info dd {
+            flex: 1 1 45%;
+            margin: 0 2.5%;
+            margin-bottom: 20px;
+        }
+        .profile-info dt {
+            font-weight: 600;
+        }
+        .profile-info i {
+            margin-right: 8px;
+            color: #ffd700;
+        }
+        .edit-profile-btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 25px;
+            background-color: #ff6347;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: background-color 0.3s;
+        }
+        .edit-profile-btn:hover {
+            background-color: #e55335;
+        }
+        .back-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            z-index: 1000;
+        }
+        .back-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <h1>Profile View</h1>
-    <!-- Display user profile information here -->
-    <a href="{% url 'profile_edit' %}">Edit Profile</a>
+    <div class="profile-container">
+        <div class="profile-header">
+            <img src="{% static 'accounts/images/profile-pic.png' %}" alt="Profile Picture">
+            <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+            <p>{{ user.email }}</p>
+        </div>
+        <div class="profile-info">
+            <h2>Profile Information</h2>
+            <dl>
+                <dt><i class="fas fa-user"></i> First Name:</dt>
+                <dd>{{ user.first_name }}</dd>
+                <dt><i class="fas fa-user"></i> Last Name:</dt>
+                <dd>{{ user.last_name }}</dd>
+                <dt><i class="fas fa-envelope"></i> Email:</dt>
+                <dd>{{ user.email }}</dd>
+                <dt><i class="fas fa-user-tag"></i> Username:</dt>
+                <dd>{{ user.username }}</dd>
+                <dt><i class="fas fa-calendar-alt"></i> Joined:</dt>
+                <dd>{{ user.date_joined|date:"F j, Y" }}</dd>
+                <dt><i class="fas fa-phone"></i> Phone Number:</dt>
+                <dd>{{ user.profile.phone_number }}</dd>
+                <dt><i class="fas fa-map-marker-alt"></i> Address:</dt>
+                <dd>{{ user.profile.address }}</dd>
+                <dt><i class="fas fa-city"></i> City:</dt>
+                <dd>{{ user.profile.city }}</dd>
+                <dt><i class="fas fa-flag"></i> Country:</dt>
+                <dd>{{ user.profile.country }}</dd>
+                <dt><i class="fas fa-mail-bulk"></i> Postal Code:</dt>
+                <dd>{{ user.profile.postal_code }}</dd>
+            </dl>
+        </div>
+        <a href="{% url 'profile_edit' %}" class="edit-profile-btn">Edit Profile</a>
+    </div>
+    <button class="back-btn" onclick="window.location.href='{% url "home" %}'">Back</button>
 </body>
 </html>
+
+
+
+
+
+
+
 

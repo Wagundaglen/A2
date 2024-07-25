@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.contrib.auth import views as auth_views
 from accounts import views as accounts_views
 from banks import views as banks_views
 
@@ -27,6 +28,10 @@ urlpatterns = [
     path('accounts/logout/', accounts_views.logout_view, name='logout'),
     path('accounts/profile/view/', accounts_views.profile_view, name='profile_view'),
     path('accounts/profile/edit/', accounts_views.profile_edit, name='profile_edit'),
+    path('accounts/password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
+    path('accounts/password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('accounts/reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    path('accounts/reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
     path('banks/add/', banks_views.add_bank, name='add_bank'),
     path('banks/<int:bank_id>/branches/add/', banks_views.add_branch, name='add_branch'),
     path('banks/all/', banks_views.list_banks, name='list_banks'),  # Updated to list_banks view
@@ -34,6 +39,7 @@ urlpatterns = [
     path('banks/branch/<int:branch_id>/details/', banks_views.branch_details, name='branch_details'),
     path('banks/branch/<int:branch_id>/edit/', banks_views.edit_branch, name='edit_branch'),
 ]
+
 
 
 
