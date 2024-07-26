@@ -4,20 +4,109 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bank Details</title>
+    {% load static %}
     <link rel="stylesheet" href="{% static 'css/global_style.css' %}">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #007bff;
+        }
+        h2 {
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 1em;
+            display: inline-block;
+            margin: 10px 0;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .branch-list {
+            list-style: none;
+            padding: 0;
+        }
+        .branch-list li {
+            margin-bottom: 10px;
+        }
+        .branch-list a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .branch-list a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
 </head>
 <body>
-    <h1>Details for {{ bank.name }}</h1>
-    <p>Address: {{ bank.address }}</p>
-    <p>Phone Number: {{ bank.phone_number }}</p>
-    <h2>Branches</h2>
-    <ul>
-        {% for branch in branches %}
-            <li><a href="{% url 'branch_details' branch.id %}">{{ branch.name }}</a></li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'add_branch' bank.id %}">Add Branch</a>
+    <header>
+        <h1>Bank Management System</h1>
+    </header>
+    
+    <div class="container">
+        <h1>Details for {{ bank.name }}</h1>
+        <p><strong>Address:</strong> {{ bank.address }}</p>
+        <p><strong>Phone Number:</strong> {{ bank.phone_number }}</p>
+        
+        <a href="{% url 'add_branch' bank.id %}" class="btn">Add Branch</a>
+        
+        <h2>Branches</h2>
+        <ul class="branch-list">
+            {% for branch in branches %}
+                <li><a href="{% url 'branch_details' branch.id %}">{{ branch.name }}</a></li>
+            {% empty %}
+                <li>No branches found.</li>
+            {% endfor %}
+        </ul>
+    </div>
+    
+    <footer>
+        <p>&copy; 2024 Banking Management System. All rights reserved.</p>
+    </footer>
 </body>
 </html>
+
+
 
 

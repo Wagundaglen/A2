@@ -4,16 +4,124 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>List of Banks</title>
+    {% load static %}
     <link rel="stylesheet" href="{% static 'css/global_style.css' %}">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #007bff;
+        }
+        .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 1em;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
 </head>
 <body>
-    <h1>List of Banks</h1>
-    <ul>
-        {% for bank in banks %}
-            <li><a href="{% url 'bank_details' bank.id %}">{{ bank.name }}</a></li>
-        {% endfor %}
-    </ul>
+    <header>
+        <h1>Bank Management System</h1>
+    </header>
+    
+    <div class="container">
+        <a href="{% url 'add_bank' %}" class="btn">Add New Bank</a>
+        
+        <h1>List of Banks</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Phone Number</th>
+                    <th>Address</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for bank in banks %}
+                    <tr>
+                        <td>{{ bank.name }}</td>
+                        <td>{{ bank.phone_number }}</td>
+                        <td>{{ bank.address }}</td>
+                        <td>
+                            <a href="{% url 'bank_details' bank.id %}" class="btn">View Details</a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="4">No banks available.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <footer>
+        <p>&copy; 2024 Banking Management System. All rights reserved.</p>
+    </footer>
 </body>
 </html>
+
+
+
+
 
 
